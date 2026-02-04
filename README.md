@@ -1,4 +1,0 @@
-# This is the readme file for Python FastAPI
-
-Every Repo has 3 branches Main, Develop & Feature
-Only mentor and lead of the assigned task have approver access to main and feature branch
