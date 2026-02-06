@@ -1,15 +1,24 @@
+from contextlib import asynccontextmanager
 from fastapi import FastAPI
-import uvicorn
+from app.db.prisma import db #DB instance created in app/db/prisma.py
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    #STARTING THE DATABASE FIRST FOR THE APPLICATION TO USE
+    print("Connecting to Database...")
+    await db.connect()
+    print("Database Connected!")
+    yield # The application runs here
+    
+    # --- SHUTDOWN ---
+    print("Disconnecting from Database...")
+    if db.is_connected():
+        await db.disconnect()
+
+# Register the lifespan events
+app = FastAPI(lifespan=lifespan)
 
 @app.get("/")
-def read_root():
-    return {"message": "Hello World"}
-
-print("Hello HDFC")
-
-# ADD THIS AT THE BOTTOM:
-if __name__ == "__main__":
-    # This tells python: "If this file is run directly, start uvicorn"
-    uvicorn.run("main:app", host="127.0.0.1", port=8000, reload=True)
+async def root():
+    # NOW USE DB ANYWHERE IN THE APPLICATION
+    return {"message": "API is online and DB is connected"}
