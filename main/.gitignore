@@ -1,0 +1,50 @@
+# --- Dependencies ---
+node_modules/
+__pycache__/
+*.py[cod]
+
+# --- Environments ---
+.venv/
+venv/
+ENV/
+env/
+.conda/
+.env
+.env.*
+!.env.example
+
+# --- Prisma ---
+# Ignores the generated engine and client, but keeps your schema
+/generated/
+/prisma/generated/
+*.prisma.client
+/prisma/
+# --- Databases ---
+*.db
+*.sqlite3
+dev.db
+test.sqlite3
+
+# --- FastAPI / Documentation ---
+openapi.json
+redoc-static.html
+docs/build/
+
+# --- Testing & Coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+test_results/
+*.asyncio
+async_test.db
+
+# --- Logs ---
+*.log
+uvicorn.log
+
+# --- System & IDE ---
+.DS_Store
+.vscode/
+.idea/
+*.swp

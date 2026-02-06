@@ -45,6 +45,15 @@ SECRET_KEY=change_this_secret_key
 
 # Database (Prisma)
 DATABASE_URL="postgresql://user:password@localhost:5432/rr_db?schema=public"
+# 1. Add DATABASE_URL to .env
+# 2. Pull schema from DB
+prisma db pull
+
+# 3. Generate Prisma client
+prisma generate
+
+# 4. Start backend
+uvicorn main:app --reload
 
 # Caching
 REDIS_URL="redis://localhost:6379/0"
